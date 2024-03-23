@@ -3,6 +3,7 @@
 #include <windows.h>
 #include<random>
 #include<conio.h>
+#include<unistd.h>
 using namespace std; 
 
 #define Max_length 1000
@@ -145,6 +146,10 @@ class Board{
     {
         return score;
     }
+    void display_score()
+    {   gotoxy(consoleWidth/2,0);
+        cout<<"CURRENT SCORE : "<<score;
+    }
     void spawnFood(){
         int x = rand() % consoleWidth;
         int y = rand() % consoleHeight;
@@ -168,6 +173,7 @@ class Board{
         }
         gotoxy(food.x_coord,food.y_coord);
         cout<<FOOD;
+        display_score();
     }
     bool update(){
        bool isAlive =  snake->move(food);
@@ -184,9 +190,9 @@ class Board{
     }
     void get_Input()
     {
-        if(kbhit())
+        if(_kbhit())
         {
-            int key = getch();
+            int key = _getch();
             if(key == 'w' || key == 'W')
             {
                 snake->change_dir(dir_Up);
@@ -213,8 +219,11 @@ int main()
     while(board -> update())
     {
         board->get_Input();
+        board->draw();
+        sleep(100);
     }
     cout<<"GAME OVER"<<endl;
+    cout<<"Your Final score is :"<<board->get_score();
 
     return 0;
 }
