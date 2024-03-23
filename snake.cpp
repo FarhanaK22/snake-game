@@ -99,11 +99,11 @@ class Snake{
             body[0].y_coord = val+1;
             break;
             case dir_Right :
-            val = body[0].y_coord;
+            val = body[0].x_coord;
             body[0].x_coord = val+1;
             break;
             case dir_Left :
-            val = body[0].y_coord;
+            val = body[0].x_coord;
             body[0].x_coord = val-1;
             break;
         }
@@ -147,7 +147,8 @@ class Board{
         return score;
     }
     void display_score()
-    {   gotoxy(consoleWidth/2,0);
+    {   cout<<endl;
+        gotoxy(consoleWidth/2,0);
         cout<<"CURRENT SCORE : "<<score;
     }
     void spawnFood(){
