@@ -9,10 +9,10 @@ using namespace std;
 #define Max_length 1000
 
 //Directions 
-const char dir_Up = 'U';
-const char dir_Down = 'D';
-const char dir_Right = 'R';
-const char dir_Left = 'L';
+const char dir_Up = 'w';
+const char dir_Down = 's';
+const char dir_Right = 'd';
+const char dir_Left = 'a';
 
 int consoleWidth, consoleHeight;
 
@@ -216,14 +216,19 @@ int main()
 {
     initScreen();
     Board *board = new Board();
-    while(board -> update())
-    {
+    while(true)
+    {  if (!_kbhit()) {
+            // No keyboard input, move the snake
+            if (!board -> update()) {
+                cout<<"GAME OVER"<<endl;
+                cout<<"Your Final score is :"<<board->get_score();
+                break;
+            }
+            board->draw();
+            Sleep(100); // Delay for smoother animation
+        }
         board->get_Input();
-        board->draw();
-        sleep(100);
     }
-    cout<<"GAME OVER"<<endl;
-    cout<<"Your Final score is :"<<board->get_score();
 
     return 0;
 }
