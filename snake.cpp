@@ -269,15 +269,14 @@ int main()
         }
         if(board->get_score()==999)
         { 
-            cout<<"\n\n\t\t\t\t\t\t";
-            cout<<"CONGRATULATIONS!";
-            cout<<"\n\n\t\t\t\t\t\t";
-            cout<<"YOU COMPLETED THE GAME";
-           break;
+                cout<<"\n\n\t\t\t\t\t\t";
+                cout<<"CONGRATULATIONS!";
+                cout<<"\n\n\t\t\t\t\t\t";
+                cout<<"YOU COMPLETED THE GAME";
+            break;
         }
         board->get_Input();
     }
-     
 
     return 0;
 }
