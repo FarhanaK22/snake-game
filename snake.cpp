@@ -1,6 +1,8 @@
+#include <windows.h>
+#include <process.h>
 #include <cstdlib> 
 #include <iostream> 
-#include <windows.h>
+#include<stdio.h>
 #include<random>
 #include<conio.h>
 #include<unistd.h>
@@ -252,31 +254,45 @@ class Board{
         }
     }
 };
+void ShowGameWinMessage() {
+    MessageBoxA(NULL, "CONGRATULATIONS!\nSCORE = 100\nLevel completed", "Snake Game", MB_ICONINFORMATION);
+}
+void ShowGameOverMessage(int x) {
+    std::string scoreString = std::to_string(x);
+
+    // Create the message
+    std::string message = "GAME OVER\nYour Final score is: " + scoreString;
+
+    // Display the message box
+    MessageBoxA(NULL, message.c_str(), "Snake Game", MB_ICONINFORMATION);
+}
 int main()
 {
     initScreen();
     Board *board = new Board();
+    int x;
+    int flag =0;
     while(true)
     {  if (!_kbhit()) {
             // No keyboard input, move the snake
             if (!board -> update()) {
-                cout<<"\nGAME OVER"<<endl;
-                cout<<"Your Final score is :"<<board->get_score();
-                break;
+            x= board->get_score();
+            break;
             }
             board->draw();
             Sleep(100); // Delay for smoother animation
         }
-        if(board->get_score()==999)
+        if(board->get_score()==100)
         { 
-                cout<<"\n\n\t\t\t\t\t\t";
-                cout<<"CONGRATULATIONS!";
-                cout<<"\n\n\t\t\t\t\t\t";
-                cout<<"YOU COMPLETED THE GAME";
+           flag=1;
             break;
         }
         board->get_Input();
     }
+    if (flag==0)
+    ShowGameOverMessage( x);
+    else
+    ShowGameWinMessage();
 
     return 0;
 }
