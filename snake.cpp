@@ -260,15 +260,24 @@ int main()
     {  if (!_kbhit()) {
             // No keyboard input, move the snake
             if (!board -> update()) {
-                cout<<"GAME OVER"<<endl;
+                cout<<"\nGAME OVER"<<endl;
                 cout<<"Your Final score is :"<<board->get_score();
                 break;
             }
             board->draw();
             Sleep(100); // Delay for smoother animation
         }
+        if(board->get_score()==999)
+        { 
+            cout<<"\n\n\t\t\t\t\t\t";
+            cout<<"CONGRATULATIONS!";
+            cout<<"\n\n\t\t\t\t\t\t";
+            cout<<"YOU COMPLETED THE GAME";
+           break;
+        }
         board->get_Input();
     }
+     
 
     return 0;
 }
