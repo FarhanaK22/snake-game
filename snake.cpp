@@ -108,6 +108,25 @@ class Snake{
             break;
         }
 
+        //to adjust body of snake when it reaches any corner
+        Point head = body[0];
+
+            // Check if the head is at the left edge
+            if (head.x_coord == 0) {
+                body[0].x_coord = consoleWidth;
+            }
+            // Check if the head is at the right edge
+            else if (head.x_coord == consoleWidth) {
+                body[0].x_coord = 0;
+            }
+            // Check if the head is at the top edge
+            else if (head.y_coord == 0) {
+                body[0].y_coord = consoleHeight;
+            }
+            else if (head.y_coord == consoleHeight) {
+                body[0].y_coord = 0;
+            }
+        
         //when snake bites itself 
         for(int i =1;i<length;i++)
         {
@@ -209,6 +228,26 @@ class Board{
             else  if(key == 'd' || key == 'D')
             {
                 snake->change_dir(dir_Right);
+            }
+            //if any arrow key pressed 
+            else{
+                    switch (key) {
+                        case 72: // Up arrow
+                            snake->change_dir(dir_Up);
+                            break;
+                        case 80: // Down arrow
+                            snake->change_dir(dir_Down);
+                            break;
+                        case 75: // Left arrow
+                            snake->change_dir(dir_Left);
+                            break;
+                        case 77: // Right arrow
+                            snake->change_dir(dir_Right);
+                            break;
+                        default:
+                            // Handle other arrow keys if needed
+                            break;
+                    }
             }
         }
     }
